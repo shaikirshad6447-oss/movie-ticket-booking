@@ -1,0 +1,303 @@
+/* ==============================================================================
+   INTERACTIVE SEAT SELECTION CINEMATIC STYLESHEET
+   Online Movie Ticket Booking System - Project Owner: Shaik Irshad
+   ============================================================================== */
+
+.seating-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.screen-area {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==============================================================================
+   CINEMA SCREEN CURVE & GLOW
+   ============================================================================== */
+.cinema-screen-container {
+    width: 80%;
+    margin-bottom: 3.5rem;
+    text-align: center;
+    perspective: 400px;
+}
+
+.cinema-screen-arc {
+    height: 14px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4), 0 0 50px rgba(229, 9, 20, 0.4);
+    transform: rotateX(-35deg);
+}
+
+.cinema-screen-text {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+/* ==============================================================================
+   SEAT MATRIX GRID
+   ============================================================================== */
+.seat-matrix-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+}
+
+.row-label {
+    width: 24px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.seat-group {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.seat-aisle-gap {
+    width: 1.5rem;
+}
+
+/* Seat Elements */
+.seat {
+    width: 32px;
+    height: 30px;
+    border-radius: 6px 6px 3px 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    user-select: none;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1.5px solid var(--seat-available);
+    color: #A7F3D0;
+}
+
+/* Available (Green) */
+.seat.available:hover {
+    background: var(--seat-available);
+    color: #064E3B;
+    transform: scale(1.15);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+/* Selected (Yellow) */
+.seat.selected {
+    background: var(--seat-selected);
+    border-color: #D97706;
+    color: #451A03;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.65);
+    animation: seatPulse 0.3s ease;
+}
+
+/* Booked (Red) */
+.seat.booked {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: var(--seat-booked);
+    color: #FCA5A5;
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
+.seat.booked:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@keyframes seatPulse {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1.1); }
+}
+
+/* ==============================================================================
+   SEAT LEGEND
+   ============================================================================== */
+.seat-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.legend-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.legend-swatch.available {
+    background: rgba(16, 185, 129, 0.25);
+    border: 1.5px solid var(--seat-available);
+}
+
+.legend-swatch.selected {
+    background: var(--seat-selected);
+    border: 1.5px solid #D97706;
+}
+
+.legend-swatch.booked {
+    background: rgba(239, 68, 68, 0.35);
+    border: 1.5px solid var(--seat-booked);
+}
+
+/* ==============================================================================
+   BOOKING SUMMARY SIDEBAR
+   ============================================================================== */
+.booking-summary-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    position: sticky;
+    top: 96px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summary-movie-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.summary-poster {
+    width: 65px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-movie-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.summary-theatre {
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+}
+
+.summary-showtime {
+    font-size: 0.825rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+.summary-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.summary-row.total-row {
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.selected-seats-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+.seat-pill {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: var(--seat-selected);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.total-price-val {
+    color: var(--accent-gold);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.confirm-booking-btn {
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .seating-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .booking-summary-card {
+        position: static;
+    }
+}

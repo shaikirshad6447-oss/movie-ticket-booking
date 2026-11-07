@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/movies" class="nav-link">Movies</a>
+                <a href="/shows" class="nav-link">Theatres & Shows</a>
+            </nav>
+
+            <div class="nav-auth">
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Auth View -->
+    <main class="main-content">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i class="fa-solid fa-film" style="color:var(--accent-red)"></i>
+                        <span>Cine<span style="color:var(--accent-red)">Nova</span></span>
+                    </div>
+                    <h1 class="auth-title">Create Account</h1>
+                    <p class="auth-subtitle">Join CineNova for seamless instant movie reservations</p>
+                </div>
+
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label for="register-name" class="form-label">Full Name</label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" id="register-name" class="form-control" placeholder="e.g. Shaik Irshad" required autocomplete="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-email" class="form-label">Email Address</label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="register-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-password" class="form-label">Password</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="register-password" class="form-control" placeholder="At least 6 characters" minlength="6" required autocomplete="new-password">
+                            <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-confirm-password" class="form-label">Confirm Password</label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                            <input type="password" id="register-confirm-password" class="form-control" placeholder="Re-enter your password" minlength="6" required autocomplete="new-password">
+                            <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg auth-submit-btn">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    Already registered? <a href="/login">Sign in to your account</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div>© 2026 CineNova. Project Owner: <strong>Shaik Irshad</strong>.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

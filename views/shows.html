@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theatres & Show Schedules - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/movies.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/movies" class="nav-link">Movies</a>
+                <a href="/shows" class="nav-link active">Theatres & Shows</a>
+                <a href="/bookings" class="nav-link">My Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+                <a href="/register" class="btn btn-sm btn-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-solid fa-location-dot"></i> CINEMA DIRECTORY</span>
+                    <h1 class="section-title">Theatres & Show Schedules</h1>
+                    <p class="section-subtitle">Browse cinema screenings by date, theatre venue, and ticket price</p>
+                </div>
+            </div>
+
+            <!-- Filters Toolbar -->
+            <div class="catalog-toolbar">
+                <div class="filter-group" style="width:100%; justify-content:space-between;">
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; flex:1;">
+                        <input type="text" id="theatre-search" class="form-control" style="max-width:320px;" placeholder="Search by theatre name...">
+                        <select id="theatre-filter" class="filter-select">
+                            <option value="All">All Cinemas</option>
+                            <option value="PVR INOX Gold Class - Nexus Mall">PVR INOX Gold Class</option>
+                            <option value="IMAX Experience - Forum South">IMAX Experience</option>
+                            <option value="Cinepolis VIP - Grand Central">Cinepolis VIP</option>
+                            <option value="Miraj Cinemas - Apex Towers">Miraj Cinemas</option>
+                        </select>
+                    </div>
+                    <span class="badge badge-gold" id="shows-count">Loading shows...</span>
+                </div>
+            </div>
+
+            <!-- All Shows List Container -->
+            <div id="all-shows-list" style="display:flex; flex-direction:column; gap:1.5rem;">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading show schedules from MySQL database...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                    <span>Cine<span class="highlight">Nova</span></span>
+                </a>
+                <p class="footer-desc">
+                    Comprehensive Online Movie Ticket Booking System designed for seamless cinema reservations.
+                </p>
+                <div class="footer-owner">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Project Owner: <strong>Shaik Irshad</strong></span>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/movies">Movies</a>
+                    <a href="/shows">Shows</a>
+                    <a href="/bookings">My Bookings</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 CineNova. Project Owner: <strong>Shaik Irshad</strong>.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const listEl = document.getElementById('all-shows-list');
+            const countEl = document.getElementById('shows-count');
+            const searchInput = document.getElementById('theatre-search');
+            const theatreFilter = document.getElementById('theatre-filter');
+
+            let allShows = [];
+
+            async function fetchShows() {
+                try {
+                    const data = await CineNova.api('/api/shows');
+                    allShows = data.shows || [];
+                    renderShows();
+                } catch (err) {
+                    listEl.innerHTML = `<div class="empty-state">Failed to load shows: ${err.message}</div>`;
+                }
+            }
+
+            function renderShows() {
+                const search = (searchInput.value || '').trim().toLowerCase();
+                const selectedTheatre = theatreFilter.value;
+
+                let filtered = allShows.filter(s => {
+                    const matchesSearch = s.theatre_name.toLowerCase().includes(search) || s.movie_title.toLowerCase().includes(search);
+                    const matchesTheatre = selectedTheatre === 'All' || s.theatre_name === selectedTheatre;
+                    return matchesSearch && matchesTheatre;
+                });
+
+                countEl.textContent = `${filtered.length} Shows`;
+
+                if (filtered.length === 0) {
+                    listEl.innerHTML = `<div class="empty-state">No scheduled shows found matching criteria.</div>`;
+                    return;
+                }
+
+                // Group by movie & theatre
+                listEl.innerHTML = filtered.map(s => `
+                    <div class="theatre-card" style="grid-template-columns: 80px 1.5fr 1fr; align-items:center;">
+                        <img src="${s.poster_url || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=150'}" 
+                             style="width:80px; height:110px; object-fit:cover; border-radius:var(--radius-md);" 
+                             alt="${s.movie_title}">
+                        
+                        <div>
+                            <span class="badge badge-red" style="font-size:0.7rem; margin-bottom:4px;">${s.language} • ${s.genre}</span>
+                            <h3 style="font-size:1.25rem; font-weight:700;">${s.movie_title}</h3>
+                            <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:2px;">
+                                <i class="fa-solid fa-location-dot" style="color:var(--accent-red)"></i> ${s.theatre_name}
+                            </p>
+                            <p style="color:var(--accent-gold); font-size:0.85rem; font-weight:600; margin-top:4px;">
+                                <i class="fa-regular fa-calendar"></i> ${CineNova.formatDate(s.show_date)} at ${CineNova.formatTime(s.show_time)}
+                            </p>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem;">
+                            <span style="font-size:0.8rem; color:var(--text-muted)">Ticket Price</span>
+                            <span style="font-size:1.35rem; font-weight:800; color:var(--accent-gold)">${CineNova.formatCurrency(s.ticket_price)}</span>
+                            <a href="/seats?showId=${s.show_id}" class="btn btn-primary btn-sm">
+                                <i class="fa-solid fa-chair"></i> Select Seats
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            if (searchInput) searchInput.addEventListener('input', renderShows);
+            if (theatreFilter) theatreFilter.addEventListener('change', renderShows);
+
+            fetchShows();
+        });
+    </script>
+</body>
+</html>

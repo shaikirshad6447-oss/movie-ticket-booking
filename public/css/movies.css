@@ -1,0 +1,502 @@
+/* ==============================================================================
+   MOVIES & CATALOG CINEMATIC STYLESHEET
+   Online Movie Ticket Booking System - Project Owner: Shaik Irshad
+   ============================================================================== */
+
+/* ==============================================================================
+   HERO BANNER
+   ============================================================================== */
+.hero-banner {
+    position: relative;
+    min-height: 540px;
+    background: linear-gradient(180deg, rgba(11, 11, 15, 0.4) 0%, rgba(11, 11, 15, 0.95) 100%),
+                url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 1360px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.hero-badge-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hero-title {
+    font-size: 3.25rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+}
+
+.hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.hero-description {
+    color: #D4D4D8;
+    font-size: 1.05rem;
+    max-width: 620px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+/* ==============================================================================
+   FILTER & SEARCH BAR
+   ============================================================================== */
+.catalog-toolbar {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-card);
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 260px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 1rem 0.7rem 2.75rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.7rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-select:focus {
+    border-color: var(--accent-red);
+}
+
+/* ==============================================================================
+   MOVIE GRID & CARDS
+   ============================================================================== */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.movie-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    position: relative;
+    box-shadow: var(--shadow-card);
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-highlight);
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+}
+
+.poster-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 145%; /* Cinematic 2:3 aspect ratio */
+    overflow: hidden;
+    background: #111;
+}
+
+.poster-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.movie-card:hover .poster-img {
+    transform: scale(1.06);
+}
+
+.poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(11, 11, 15, 0.95) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    opacity: 0.9;
+}
+
+.poster-badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(11, 11, 15, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--accent-gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.lang-badge {
+    background: rgba(229, 9, 20, 0.85);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+}
+
+.movie-card-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0.6rem;
+}
+
+.movie-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-card-genre {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: auto;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.movie-card-btn {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+/* ==============================================================================
+   MOVIE DETAILS PAGE
+   ============================================================================== */
+.details-hero {
+    position: relative;
+    min-height: 480px;
+    background: linear-gradient(180deg, rgba(11, 11, 15, 0.3) 0%, rgba(11, 11, 15, 0.98) 100%);
+    padding: 3rem 0;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3.5rem;
+    align-items: flex-start;
+}
+
+.details-poster-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-color);
+}
+
+.details-poster-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.details-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.details-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.details-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.details-synopsis {
+    color: #D4D4D8;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.details-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.25rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.spec-val {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ==============================================================================
+   SHOWS & THEATRE SCHEDULE SECTION
+   ============================================================================== */
+.theatres-section {
+    margin-top: 3.5rem;
+}
+
+.date-scroller {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.date-pill {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 90px;
+    flex-shrink: 0;
+}
+
+.date-pill:hover,
+.date-pill.active {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-red-glow);
+}
+
+.date-pill .day {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.date-pill .num {
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.theatre-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.theatre-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theatre-features {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.showtimes-grid {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.showtime-btn {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.showtime-btn:hover {
+    border-color: var(--accent-red);
+    background: rgba(229, 9, 20, 0.12);
+    transform: translateY(-2px);
+}
+
+.showtime-time {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.showtime-price {
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    .theatre-card {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}

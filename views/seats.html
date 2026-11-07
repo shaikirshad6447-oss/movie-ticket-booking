@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Seats - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/seats.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/movies" class="nav-link">Movies</a>
+                <a href="/shows" class="nav-link">Theatres & Shows</a>
+                <a href="/bookings" class="nav-link">My Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+                <a href="/register" class="btn btn-sm btn-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <div class="section-header" style="margin-bottom:1.75rem;">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-solid fa-couch"></i> CINEMA SEAT MAP</span>
+                    <h1 class="section-title">Select Your Preferred Seats</h1>
+                    <p class="section-subtitle">Click on any green seat to reserve. Red seats are already booked.</p>
+                </div>
+                <a href="/movies" class="btn btn-sm btn-outline"><i class="fa-solid fa-arrow-left"></i> Change Movie</a>
+            </div>
+
+            <div class="seating-wrapper">
+                
+                <!-- Screen & Interactive Seat Matrix -->
+                <div class="screen-area">
+                    
+                    <!-- Curved Cinema Screen Indicator -->
+                    <div class="cinema-screen-container">
+                        <div class="cinema-screen-arc"></div>
+                        <div class="cinema-screen-text">ALL EYES THIS WAY — SCREEN</div>
+                    </div>
+
+                    <!-- Dynamic Seat Matrix Grid -->
+                    <div class="seat-matrix-container" id="seat-matrix">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading real-time cinema seat availability...</p>
+                        </div>
+                    </div>
+
+                    <!-- Seat Legend -->
+                    <div class="seat-legend">
+                        <div class="legend-item">
+                            <div class="legend-swatch available"></div>
+                            <span>Available (Green)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch selected"></div>
+                            <span>Selected (Yellow)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch booked"></div>
+                            <span>Booked (Red)</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Booking Summary Sticky Sidebar -->
+                <div class="booking-summary-card">
+                    
+                    <div class="summary-movie-info">
+                        <img id="summary-poster" src="" alt="Movie" class="summary-poster">
+                        <div class="summary-details">
+                            <h3 class="summary-movie-title" id="summary-movie-title">Loading...</h3>
+                            <p class="summary-theatre" id="summary-theatre">--</p>
+                            <p class="summary-showtime" id="summary-showtime">--</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-breakdown">
+                        <div class="summary-row">
+                            <span>Ticket Price:</span>
+                            <strong id="summary-ticket-price" style="color:var(--text-primary)">₹0.00</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Seats Selected (<span id="selected-count">0</span>):</span>
+                            <div class="selected-seats-pills" id="selected-seats-list">
+                                <span style="color:var(--text-muted);font-size:0.85rem;">None selected</span>
+                            </div>
+                        </div>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="summary-subtotal">₹0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Convenience Fee & GST:</span>
+                            <span style="color:#10B981; font-weight:600;">₹0.00 (Free)</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total Payable:</span>
+                            <span class="total-price-val" id="summary-total-amount">₹0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg confirm-booking-btn" id="confirm-booking-btn" disabled>
+                        Select Seats to Proceed
+                    </button>
+
+                    <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; line-height:1.4;">
+                        <i class="fa-solid fa-shield-halved"></i> 100% Secure reservation guaranteed via atomic MySQL transactions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div>© 2026 CineNova Movie Ticketing. Project Owner: <strong>Shaik Irshad</strong>.</div>
+            <div>Real-Time Seat Booking Engine • MySQL Concurrency Protection</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/seats.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineNova - Premium Online Movie Ticket Booking | Shaik Irshad</title>
+    <!-- Favicon & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/movies.css">
+</head>
+<body>
+
+    <!-- ======================================================================
+         TOP NAVIGATION BAR
+         ====================================================================== -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+                <span class="brand-badge">Premium Cinema</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link active">Home</a>
+                <a href="/movies" class="nav-link">Movies</a>
+                <a href="/shows" class="nav-link">Theatres & Shows</a>
+                <a href="/bookings" class="nav-link">My Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <!-- Dynamically populated via main.js based on auth state -->
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+                <a href="/register" class="btn btn-sm btn-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ======================================================================
+         MAIN CONTENT AREA
+         ====================================================================== -->
+    <main class="main-content">
+
+        <!-- HERO CINEMATIC BANNER -->
+        <section class="hero-banner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge-wrap">
+                        <span class="badge badge-red"><i class="fa-solid fa-fire"></i> NOW SHOWING</span>
+                        <span class="badge badge-gold" id="hero-movie-rating"><i class="fa-solid fa-star"></i> 8.9 / 10</span>
+                        <span class="badge badge-outline" id="hero-movie-genre">Biography / Drama</span>
+                    </div>
+                    <h1 class="hero-title" id="hero-movie-title">Oppenheimer</h1>
+                    <div class="hero-meta">
+                        <span><i class="fa-solid fa-language" style="color:var(--accent-red)"></i> English, Hindi</span>
+                        <span><i class="fa-regular fa-clock" style="color:var(--accent-gold)"></i> <span id="hero-movie-duration">180 mins</span></span>
+                        <span><i class="fa-solid fa-award" style="color:var(--accent-red)"></i> 7 Academy Awards</span>
+                    </div>
+                    <p class="hero-description" id="hero-movie-desc">
+                        Experience Christopher Nolan’s global phenomenon on the largest IMAX screens with crystal-clear 4K laser projection and next-generation immersive sound.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="/movie-details?id=1" id="hero-book-btn" class="btn btn-lg btn-primary">
+                            <i class="fa-solid fa-ticket"></i> Book Tickets Now
+                        </a>
+                        <button id="hero-trailer-btn" class="btn btn-lg btn-secondary">
+                            <i class="fa-solid fa-play"></i> Watch Trailer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOW SHOWING SECTION -->
+        <section class="container" style="padding-top: 3.5rem;">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-solid fa-circle-play"></i> IN THEATRES TODAY</span>
+                    <h2 class="section-title">Now Showing</h2>
+                    <p class="section-subtitle">Catch the biggest blockbusters on giant screens near you</p>
+                </div>
+                <a href="/movies" class="btn btn-outline btn-sm">View All Movies <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="movies-grid" id="now-showing-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading premier cinema schedule...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- POPULAR & TOP RATED MOVIES SECTION -->
+        <section class="container" style="padding-top: 2rem;">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-solid fa-crown" style="color:var(--accent-gold)"></i> CRITICS' CHOICE</span>
+                    <h2 class="section-title">Highest Rated Masterpieces</h2>
+                    <p class="section-subtitle">Legendary cinema rated 8.5+ by millions of movie lovers worldwide</p>
+                </div>
+            </div>
+
+            <div class="movies-grid" id="popular-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPCOMING ATTRACTIONS SECTION -->
+        <section class="container" style="padding-top: 2rem;">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-regular fa-calendar-check"></i> ADVANCE BOOKINGS</span>
+                    <h2 class="section-title">Coming Soon to CineNova</h2>
+                    <p class="section-subtitle">Reserve premium recliners and IMAX seats ahead of time</p>
+                </div>
+            </div>
+
+            <div class="movies-grid" id="upcoming-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CHOOSE CINENOVA PROMO BAR -->
+        <section class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; text-align: center;">
+                <div>
+                    <div style="width: 60px; height: 60px; background: rgba(229,9,20,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--accent-red); font-size: 1.5rem;">
+                        <i class="fa-solid fa-couch"></i>
+                    </div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Interactive Seat Matrix</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Real-time seat selection with live conflict prevention and visual seat maps.</p>
+                </div>
+                <div>
+                    <div style="width: 60px; height: 60px; background: rgba(212,175,55,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--accent-gold); font-size: 1.5rem;">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Instant Confirmation</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Atomic MySQL transactions guarantee you never lose your selected seat reservation.</p>
+                </div>
+                <div>
+                    <div style="width: 60px; height: 60px; background: rgba(16,185,129,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: #10B981; font-size: 1.5rem;">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Contactless M-Tickets</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem;">Instant digital e-tickets with printable QR codes directly on your smartphone.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================================================================
+         CINEMATIC FOOTER
+         ====================================================================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                    <span>Cine<span class="highlight">Nova</span></span>
+                </a>
+                <p class="footer-desc">
+                    Next-generation Online Movie Ticket Booking System delivering state-of-the-art cinema seat reservations with real-time MySQL transaction synchronization.
+                </p>
+                <div class="footer-owner">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Project Owner: <strong>Shaik Irshad</strong></span>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/movies">All Movies</a>
+                    <a href="/shows">Cinema Schedules</a>
+                    <a href="/bookings">My Bookings</a>
+                    <a href="/admin">Admin Console</a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Top Cinemas</h4>
+                <div class="footer-links">
+                    <a href="/shows">PVR INOX Gold Class</a>
+                    <a href="/shows">IMAX Forum Experience</a>
+                    <a href="/shows">Cinepolis VIP Megaplex</a>
+                    <a href="/shows">Miraj Cinemas Apex</a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Technical Stack</h4>
+                <div class="footer-links">
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">Express.js 4.x REST APIs</span>
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">MySQL 8.0 Database Pool</span>
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">Helmet & Rate Limiting</span>
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">Vanilla JavaScript + Fetch API</span>
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">JWT + Bcrypt Encryption</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                © 2026 CineNova Movie Ticketing. Designed and Developed by <strong>Shaik Irshad</strong>.
+            </div>
+            <div>
+                College Mini-Project • Full-Stack Production Implementation
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/movies.js"></script>
+</body>
+</html>

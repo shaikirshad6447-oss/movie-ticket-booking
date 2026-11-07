@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Console - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+                <span class="brand-badge" style="background:rgba(229,9,20,0.15); color:var(--accent-red); border-color:rgba(229,9,20,0.3);">
+                    Admin Console
+                </span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Main Site</a>
+                <a href="/movies" class="nav-link">Catalog</a>
+                <a href="/bookings" class="nav-link">Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <!-- Dynamically populated -->
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Admin Layout -->
+    <div class="admin-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <div class="admin-badge-wrap">
+                <i class="fa-solid fa-user-shield admin-badge-icon"></i>
+                <div class="admin-badge-text">
+                    <h4>Admin Management</h4>
+                    <p>Shaik Irshad (Owner)</p>
+                </div>
+            </div>
+
+            <nav class="admin-nav">
+                <div class="admin-nav-item active" data-tab="overview">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard Overview</span>
+                </div>
+                <div class="admin-nav-item" data-tab="movies">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <span>Movie Catalog</span>
+                </div>
+                <div class="admin-nav-item" data-tab="shows">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Show Scheduling</span>
+                </div>
+                <div class="admin-nav-item" data-tab="bookings">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span>All Bookings</span>
+                </div>
+                <div class="admin-nav-item" data-tab="users">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customer Users</span>
+                </div>
+            </nav>
+
+            <div style="margin-top:auto; padding-top:1.5rem; border-top:1px solid var(--border-color);">
+                <a href="/" class="btn btn-sm btn-outline" style="width:100%;">
+                    <i class="fa-solid fa-arrow-left"></i> Return to Site
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Panes -->
+        <main class="admin-content">
+
+            <!-- TAB 1: OVERVIEW PANE -->
+            <div class="admin-tab-pane active" id="tab-overview">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Dashboard Overview</h1>
+                        <p class="section-subtitle">Real-time statistics from MySQL database</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-film"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-label">Total Movies</span>
+                            <span class="stat-value" id="stat-movies">--</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-label">Total Shows</span>
+                            <span class="stat-value" id="stat-shows">--</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-ticket"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-label">Total Bookings</span>
+                            <span class="stat-value" id="stat-bookings">--</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-label">Gross Revenue</span>
+                            <span class="stat-value" id="stat-revenue" style="font-size:1.45rem;">--</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-label">Registered Customers</span>
+                            <span class="stat-value" id="stat-users">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Bookings Table -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3 class="table-title">Recent Transactions</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking #</th>
+                                    <th>Customer</th>
+                                    <th>Movie</th>
+                                    <th>Theatre</th>
+                                    <th>Date & Time</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-bookings-tbody">
+                                <tr><td colspan="7" style="text-align:center;">Loading records...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: MOVIES MANAGER PANE -->
+            <div class="admin-tab-pane" id="tab-movies">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Movie Management</h1>
+                        <p class="section-subtitle">Add, edit, or delete movies in the catalog</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-movie">
+                        <i class="fa-solid fa-plus"></i> Add Movie
+                    </button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Poster</th>
+                                    <th>Title</th>
+                                    <th>Genre</th>
+                                    <th>Language</th>
+                                    <th>Duration</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="movies-table-tbody">
+                                <tr><td colspan="7" style="text-align:center;">Loading movies...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: SHOWS MANAGER PANE -->
+            <div class="admin-tab-pane" id="tab-shows">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Show Scheduling</h1>
+                        <p class="section-subtitle">Manage screening timings, theatres, and ticket prices</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-show">
+                        <i class="fa-solid fa-plus"></i> Schedule Show
+                    </button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Show #</th>
+                                    <th>Movie</th>
+                                    <th>Theatre</th>
+                                    <th>Show Date</th>
+                                    <th>Show Time</th>
+                                    <th>Ticket Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shows-table-tbody">
+                                <tr><td colspan="7" style="text-align:center;">Loading shows...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: BOOKINGS MANAGER PANE -->
+            <div class="admin-tab-pane" id="tab-bookings">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">All Customer Bookings</h1>
+                        <p class="section-subtitle">View bookings and update reservation status</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Movie</th>
+                                    <th>Theatre</th>
+                                    <th>Seats</th>
+                                    <th>Amount</th>
+                                    <th>Status Action</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-bookings-tbody">
+                                <tr><td colspan="8" style="text-align:center;">Loading bookings...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: USERS MANAGER PANE -->
+            <div class="admin-tab-pane" id="tab-users">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Registered Customer Accounts</h1>
+                        <p class="section-subtitle">View user registration records and activity metrics</p>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Role</th>
+                                    <th>Total Bookings</th>
+                                    <th>Total Spent</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-tbody">
+                                <tr><td colspan="7" style="text-align:center;">Loading users...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ======================================================================
+         ADD / EDIT MOVIE MODAL
+         ====================================================================== -->
+    <div class="modal-overlay" id="movie-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title" id="movie-modal-title">Add New Movie</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="movie-form">
+                <div class="modal-body" style="display:flex; flex-direction:column; gap:1rem;">
+                    <input type="hidden" id="movie-id">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Movie Title *</label>
+                        <input type="text" id="movie-title" class="form-control" required placeholder="e.g. Gladiator II">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Genre *</label>
+                            <input type="text" id="movie-genre" class="form-control" required placeholder="e.g. Action / Adventure">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Language *</label>
+                            <input type="text" id="movie-language" class="form-control" required placeholder="e.g. English">
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Duration (mins) *</label>
+                            <input type="number" id="movie-duration" class="form-control" required placeholder="e.g. 150">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Release Date *</label>
+                            <input type="date" id="movie-release" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rating (1-10)</label>
+                            <input type="number" step="0.1" id="movie-rating" class="form-control" value="8.5">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Poster Image URL</label>
+                        <input type="url" id="movie-poster" class="form-control" placeholder="https://image.tmdb.org/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Trailer URL (YouTube)</label>
+                        <input type="url" id="movie-trailer" class="form-control" placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description / Synopsis</label>
+                        <textarea id="movie-description" class="form-control" rows="3" placeholder="Movie overview..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-modal-close">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Movie</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         ADD / EDIT SHOW MODAL
+         ====================================================================== -->
+    <div class="modal-overlay" id="show-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title" id="show-modal-title">Schedule New Show</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="show-form">
+                <div class="modal-body" style="display:flex; flex-direction:column; gap:1rem;">
+                    <input type="hidden" id="show-id">
+
+                    <div class="form-group">
+                        <label class="form-label">Select Movie *</label>
+                        <select id="show-movie-id" class="filter-select" style="width:100%;" required>
+                            <!-- Dynamically loaded -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Theatre Name *</label>
+                        <input type="text" id="show-theatre" class="form-control" required placeholder="e.g. PVR INOX Gold Class - Nexus Mall">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Show Date *</label>
+                            <input type="date" id="show-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Show Time *</label>
+                            <input type="time" id="show-time" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ticket Price (₹) *</label>
+                        <input type="number" step="0.5" id="show-price" class="form-control" required placeholder="e.g. 350.00">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-modal-close">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Show</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/admin.js"></script>
+</body>
+</html>

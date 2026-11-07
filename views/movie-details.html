@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/movies.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/movies" class="nav-link active">Movies</a>
+                <a href="/shows" class="nav-link">Theatres & Shows</a>
+                <a href="/bookings" class="nav-link">My Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+                <a href="/register" class="btn btn-sm btn-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Movie Details Hero Banner -->
+        <div class="details-hero">
+            <div class="container" id="movie-details-content">
+                <div class="details-grid">
+                    
+                    <!-- Poster Card -->
+                    <div class="details-poster-card">
+                        <img id="detail-poster" src="" alt="Movie Poster">
+                    </div>
+
+                    <!-- Movie Info & Specs -->
+                    <div class="details-info">
+                        <div class="details-tags">
+                            <span class="badge badge-gold" id="detail-rating"><i class="fa-solid fa-star"></i> 8.5</span>
+                            <span class="badge badge-red" id="detail-language">English</span>
+                            <span class="badge badge-outline" id="detail-genre">Action</span>
+                        </div>
+
+                        <h1 class="details-title" id="detail-title">Loading Movie...</h1>
+
+                        <div class="details-specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Duration</span>
+                                <span class="spec-val" id="detail-duration">-- mins</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Release Date</span>
+                                <span class="spec-val" id="detail-release">--</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Formats</span>
+                                <span class="spec-val">IMAX 2D, 4DX, Dolby Atmos</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--text-primary);">Synopsis</h3>
+                            <p class="details-synopsis" id="detail-description">
+                                Loading description...
+                            </p>
+                        </div>
+
+                        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+                            <a href="#theatres-schedule" class="btn btn-primary btn-lg">
+                                <i class="fa-solid fa-ticket"></i> Select Showtime & Book
+                            </a>
+                            <button id="detail-trailer-btn" class="btn btn-secondary btn-lg" style="display:none;">
+                                <i class="fa-solid fa-play"></i> Watch Trailer
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Theatres & Shows Schedule Section -->
+        <section class="container theatres-section" id="theatres-schedule">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-regular fa-calendar"></i> SHOWTIMES & CINEMAS</span>
+                    <h2 class="section-title">Select Theatre & Show Time</h2>
+                    <p class="section-subtitle">Choose your preferred screening date, cinema screen, and showtime</p>
+                </div>
+            </div>
+
+            <!-- Date Selector Scroller -->
+            <div class="date-scroller" id="date-selector">
+                <!-- Dynamically populated date pills -->
+            </div>
+
+            <!-- Theatres & Showtimes List -->
+            <div id="theatres-list">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Loading available showtimes...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                    <span>Cine<span class="highlight">Nova</span></span>
+                </a>
+                <p class="footer-desc">
+                    Online Movie Ticket Booking System - Project Owner: Shaik Irshad.
+                </p>
+            </div>
+            <div>
+                <h4 class="footer-title">Navigation</h4>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/movies">Movies</a>
+                    <a href="/shows">Shows</a>
+                    <a href="/bookings">My Bookings</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title">Quality Assurance</h4>
+                <div class="footer-links">
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">Atomic MySQL Seat Transactions</span>
+                    <span style="color:var(--text-secondary); font-size:0.875rem;">Real-time Concurrency Control</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 CineNova. Project Owner: <strong>Shaik Irshad</strong>.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/movies.js"></script>
+</body>
+</html>

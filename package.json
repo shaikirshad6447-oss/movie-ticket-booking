@@ -1,0 +1,35 @@
+{
+  "name": "online-movie-ticket-booking-system",
+  "version": "1.0.0",
+  "description": "Production-grade Online Movie Ticket Booking System built with HTML5, CSS3, Vanilla JS, Node.js, Express.js, and MySQL. Owned by Shaik Irshad.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node database/seed.js",
+    "test": "node tests/app.test.js"
+  },
+  "keywords": [
+    "movie-ticket-booking",
+    "express",
+    "mysql",
+    "fullstack",
+    "vanilla-js"
+  ],
+  "author": "Shaik Irshad",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

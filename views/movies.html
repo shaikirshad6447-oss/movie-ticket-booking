@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Catalog - CineNova | Shaik Irshad</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/movies.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                <span>Cine<span class="highlight">Nova</span></span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/movies" class="nav-link active">Movies</a>
+                <a href="/shows" class="nav-link">Theatres & Shows</a>
+                <a href="/bookings" class="nav-link">My Bookings</a>
+            </nav>
+
+            <div class="nav-auth" id="nav-auth-container">
+                <a href="/login" class="btn btn-sm btn-outline">Sign In</a>
+                <a href="/register" class="btn btn-sm btn-primary">Get Started</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Movies Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Section Header -->
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <span class="section-tag"><i class="fa-solid fa-clapperboard"></i> CINEMA CATALOG</span>
+                    <h1 class="section-title">Explore All Movies</h1>
+                    <p class="section-subtitle">Discover the latest blockbusters and reserve tickets instantly</p>
+                </div>
+                <span class="badge badge-gold" id="results-count">Loading movies...</span>
+            </div>
+
+            <!-- Filters & Search Toolbar -->
+            <div class="catalog-toolbar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="catalog-search" class="search-input" placeholder="Search by movie title, actor, or synopsis...">
+                </div>
+
+                <div class="filter-group">
+                    <select id="catalog-genre" class="filter-select" aria-label="Filter by Genre">
+                        <option value="All">All Genres</option>
+                        <option value="Action">Action</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Thriller">Thriller</option>
+                    </select>
+
+                    <select id="catalog-lang" class="filter-select" aria-label="Filter by Language">
+                        <option value="All">All Languages</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Telugu">Telugu</option>
+                    </select>
+
+                    <select id="catalog-sort" class="filter-select" aria-label="Sort Movies">
+                        <option value="rating:DESC">Rating: High to Low</option>
+                        <option value="release_date:DESC">Release Date: Newest First</option>
+                        <option value="title:ASC">Title: A to Z</option>
+                        <option value="duration:DESC">Duration: Longest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Movies Grid -->
+            <div class="movies-grid" id="all-movies-grid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Fetching movies from MySQL database...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="/" class="brand-logo">
+                    <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
+                    <span>Cine<span class="highlight">Nova</span></span>
+                </a>
+                <p class="footer-desc">
+                    Comprehensive Online Movie Ticket Booking System designed for seamless cinema reservations.
+                </p>
+                <div class="footer-owner">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Project Owner: <strong>Shaik Irshad</strong></span>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/movies">All Movies</a>
+                    <a href="/shows">Cinema Schedules</a>
+                    <a href="/bookings">My Bookings</a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">Top Cinemas</h4>
+                <div class="footer-links">
+                    <a href="/shows">PVR INOX Gold Class</a>
+                    <a href="/shows">IMAX Forum Experience</a>
+                    <a href="/shows">Cinepolis VIP Megaplex</a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-title">System Status</h4>
+                <div class="footer-links">
+                    <span style="color:#10B981; font-size:0.875rem;"><i class="fa-solid fa-circle-check"></i> REST API Operational</span>
+                    <span style="color:#10B981; font-size:0.875rem;"><i class="fa-solid fa-circle-check"></i> MySQL Database Connected</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 CineNova Movie Ticketing. Project Owner: <strong>Shaik Irshad</strong>.</div>
+            <div>Node.js • Express.js • MySQL Full-Stack Architecture</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/movies.js"></script>
+</body>
+</html>
