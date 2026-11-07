@@ -5,15 +5,15 @@
  * ==============================================================================
  */
 
-const CineNova = (() => {
-    const TOKEN_KEY = 'cinenova_token';
-    const USER_KEY = 'cinenova_user';
+const IrshadCinemas = (() => {
+    const TOKEN_KEY = 'irshad_cinemas_token';
+    const USER_KEY = 'irshad_cinemas_user';
 
     /**
      * Retrieve stored JWT token
      */
     function getToken() {
-        return localStorage.getItem(TOKEN_KEY);
+        return localStorage.getItem(TOKEN_KEY) || localStorage.getItem('cinenova_token');
     }
 
     /**
@@ -21,7 +21,7 @@ const CineNova = (() => {
      */
     function getCurrentUser() {
         try {
-            const raw = localStorage.getItem(USER_KEY);
+            const raw = localStorage.getItem(USER_KEY) || localStorage.getItem('cinenova_user');
             return raw ? JSON.parse(raw) : null;
         } catch (e) {
             return null;
@@ -234,3 +234,6 @@ const CineNova = (() => {
         formatTime
     };
 })();
+
+// Alias for backward compatibility
+const CineNova = IrshadCinemas;

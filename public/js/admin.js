@@ -5,9 +5,9 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Role verification
-    const user = CineNova.getCurrentUser();
+    const user = IrshadCinemas.getCurrentUser();
     if (!user || user.role !== 'admin') {
-        CineNova.showToast('Access Denied', 'Administrator privileges required.', 'error');
+        IrshadCinemas.showToast('Access Denied', 'Administrator privileges required.', 'error');
         setTimeout(() => {
             window.location.href = '/login?redirect=/admin';
         }, 800);
@@ -45,14 +45,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     // =========================================================================
     async function loadOverview() {
         try {
-            const data = await CineNova.api('/api/admin/dashboard');
+            const data = await IrshadCinemas.api('/api/admin/dashboard');
             const stats = data.stats;
 
             document.getElementById('stat-movies').textContent = stats.total_movies;
             document.getElementById('stat-shows').textContent = stats.total_shows;
             document.getElementById('stat-bookings').textContent = stats.total_bookings;
             document.getElementById('stat-users').textContent = stats.total_users;
-            document.getElementById('stat-revenue').textContent = CineNova.formatCurrency(stats.total_revenue);
+            document.getElementById('stat-revenue').textContent = IrshadCinemas.formatCurrency(stats.total_revenue);
 
             // Recent Bookings Table
             const recentTbody = document.getElementById('recent-bookings-tbody');
@@ -66,15 +66,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <td>${b.user_name} <br><small style="color:var(--text-muted)">${b.user_email}</small></td>
                             <td>${b.movie_title}</td>
                             <td>${b.theatre_name}</td>
-                            <td>${CineNova.formatDate(b.show_date)} ${CineNova.formatTime(b.show_time)}</td>
-                            <td><strong style="color:var(--accent-gold)">${CineNova.formatCurrency(b.total_amount)}</strong></td>
+                            <td>${IrshadCinemas.formatDate(b.show_date)} ${IrshadCinemas.formatTime(b.show_time)}</td>
+                            <td><strong style="color:var(--accent-gold)">${IrshadCinemas.formatCurrency(b.total_amount)}</strong></td>
                             <td><span class="status-badge status-${b.booking_status.toLowerCase()}">${b.booking_status}</span></td>
                         </tr>
                     `).join('');
                 }
             }
         } catch (err) {
-            CineNova.showToast('Error', err.message, 'error');
+            IrshadCinemas.showToast('Error', err.message, 'error');
         }
     }
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!tbody) return;
 
         try {
-            const data = await CineNova.api('/api/movies');
+            const data = await IrshadCinemas.api('/api/movies');
             allMoviesList = data.movies || [];
 
             if (allMoviesList.length === 0) {
@@ -128,12 +128,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 btn.onclick = async () => {
                     if (confirm(`Are you sure you want to delete movie "${btn.dataset.title}"? This will delete all its shows and bookings.`)) {
                         try {
-                            const res = await CineNova.api(`/api/movies/${btn.dataset.id}`, { method: 'DELETE' });
-                            CineNova.showToast('Deleted', res.message, 'success');
+                            const res = await IrshadCinemas.api(`/api/movies/${btn.dataset.id}`, { method: 'DELETE' });
+                            IrshadCinemas.showToast('Deleted', res.message, 'success');
                             loadMoviesManager();
                             loadOverview();
                         } catch (err) {
-                            CineNova.showToast('Error', err.message, 'error');
+                            IrshadCinemas.showToast('Error', err.message, 'error');
                         }
                     }
                 };
@@ -188,23 +188,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 if (id) {
-                    await CineNova.api(`/api/movies/${id}`, {
+                    await IrshadCinemas.api(`/api/movies/${id}`, {
                         method: 'PUT',
                         body: JSON.stringify(payload)
                     });
-                    CineNova.showToast('Updated', 'Movie details updated successfully.', 'success');
+                    IrshadCinemas.showToast('Updated', 'Movie details updated successfully.', 'success');
                 } else {
-                    await CineNova.api('/api/movies', {
+                    await IrshadCinemas.api('/api/movies', {
                         method: 'POST',
                         body: JSON.stringify(payload)
                     });
-                    CineNova.showToast('Created', 'New movie added successfully.', 'success');
+                    IrshadCinemas.showToast('Created', 'New movie added successfully.', 'success');
                 }
                 modal.classList.remove('active');
                 loadMoviesManager();
                 loadOverview();
             } catch (err) {
-                CineNova.showToast('Error', err.message, 'error');
+                IrshadCinemas.showToast('Error', err.message, 'error');
             }
         };
 
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!tbody) return;
 
         try {
-            const data = await CineNova.api('/api/shows');
+            const data = await IrshadCinemas.api('/api/shows');
             allShowsList = data.shows || [];
 
             if (allShowsList.length === 0) {
@@ -236,9 +236,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>#${s.show_id}</td>
                     <td><strong>${s.movie_title}</strong></td>
                     <td>${s.theatre_name}</td>
-                    <td>${CineNova.formatDate(s.show_date)}</td>
-                    <td>${CineNova.formatTime(s.show_time)}</td>
-                    <td><strong style="color:var(--accent-gold)">${CineNova.formatCurrency(s.ticket_price)}</strong></td>
+                    <td>${IrshadCinemas.formatDate(s.show_date)}</td>
+                    <td>${IrshadCinemas.formatTime(s.show_time)}</td>
+                    <td><strong style="color:var(--accent-gold)">${IrshadCinemas.formatCurrency(s.ticket_price)}</strong></td>
                     <td>
                         <div class="table-actions">
                             <button class="btn btn-sm btn-outline btn-edit-show" data-id="${s.show_id}"><i class="fa-solid fa-pen"></i></button>
@@ -261,12 +261,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 btn.onclick = async () => {
                     if (confirm(`Are you sure you want to cancel and delete Show #${btn.dataset.id}?`)) {
                         try {
-                            const res = await CineNova.api(`/api/shows/${btn.dataset.id}`, { method: 'DELETE' });
-                            CineNova.showToast('Deleted', res.message, 'success');
+                            const res = await IrshadCinemas.api(`/api/shows/${btn.dataset.id}`, { method: 'DELETE' });
+                            IrshadCinemas.showToast('Deleted', res.message, 'success');
                             loadShowsManager();
                             loadOverview();
                         } catch (err) {
-                            CineNova.showToast('Error', err.message, 'error');
+                            IrshadCinemas.showToast('Error', err.message, 'error');
                         }
                     }
                 };
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Populate movies dropdown
         try {
-            const moviesData = await CineNova.api('/api/movies');
+            const moviesData = await IrshadCinemas.api('/api/movies');
             const movies = moviesData.movies || [];
             movieSelect.innerHTML = movies.map(m => `
                 <option value="${m.movie_id}" ${show && show.movie_id === m.movie_id ? 'selected' : ''}>${m.title} (${m.language})</option>
@@ -324,23 +324,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             try {
                 if (id) {
-                    await CineNova.api(`/api/shows/${id}`, {
+                    await IrshadCinemas.api(`/api/shows/${id}`, {
                         method: 'PUT',
                         body: JSON.stringify(payload)
                     });
-                    CineNova.showToast('Updated', 'Show schedule updated successfully.', 'success');
+                    IrshadCinemas.showToast('Updated', 'Show schedule updated successfully.', 'success');
                 } else {
-                    await CineNova.api('/api/shows', {
+                    await IrshadCinemas.api('/api/shows', {
                         method: 'POST',
                         body: JSON.stringify(payload)
                     });
-                    CineNova.showToast('Created', 'New show scheduled successfully.', 'success');
+                    IrshadCinemas.showToast('Created', 'New show scheduled successfully.', 'success');
                 }
                 modal.classList.remove('active');
                 loadShowsManager();
                 loadOverview();
             } catch (err) {
-                CineNova.showToast('Error', err.message, 'error');
+                IrshadCinemas.showToast('Error', err.message, 'error');
             }
         };
 
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!tbody) return;
 
         try {
-            const data = await CineNova.api('/api/admin/bookings');
+            const data = await IrshadCinemas.api('/api/admin/bookings');
             const bookings = data.bookings || [];
 
             if (bookings.length === 0) {
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <td>${b.movie_title}</td>
                         <td>${b.theatre_name}</td>
                         <td>${seatStr} (${b.seats})</td>
-                        <td><strong style="color:var(--accent-gold)">${CineNova.formatCurrency(b.total_amount)}</strong></td>
+                        <td><strong style="color:var(--accent-gold)">${IrshadCinemas.formatCurrency(b.total_amount)}</strong></td>
                         <td>
                             <select class="filter-select select-booking-status" data-id="${b.booking_id}" style="padding:0.3rem 0.6rem; font-size:0.8rem;">
                                 <option value="Confirmed" ${b.booking_status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
@@ -398,14 +398,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const newStatus = select.value;
                     const bookingId = select.dataset.id;
                     try {
-                        const res = await CineNova.api(`/api/admin/bookings/${bookingId}/status`, {
+                        const res = await IrshadCinemas.api(`/api/admin/bookings/${bookingId}/status`, {
                             method: 'PUT',
                             body: JSON.stringify({ status: newStatus })
                         });
-                        CineNova.showToast('Updated', res.message, 'success');
+                        IrshadCinemas.showToast('Updated', res.message, 'success');
                         loadOverview();
                     } catch (err) {
-                        CineNova.showToast('Error', err.message, 'error');
+                        IrshadCinemas.showToast('Error', err.message, 'error');
                         loadBookingsManager();
                     }
                 };
@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!tbody) return;
 
         try {
-            const data = await CineNova.api('/api/admin/users');
+            const data = await IrshadCinemas.api('/api/admin/users');
             const users = data.users || [];
 
             if (users.length === 0) {
@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${u.email}</td>
                     <td><span class="badge ${u.role === 'admin' ? 'badge-gold' : 'badge-outline'}">${u.role.toUpperCase()}</span></td>
                     <td>${u.total_bookings} bookings</td>
-                    <td><strong style="color:var(--accent-gold)">${CineNova.formatCurrency(u.total_spent)}</strong></td>
+                    <td><strong style="color:var(--accent-gold)">${IrshadCinemas.formatCurrency(u.total_spent)}</strong></td>
                     <td><small style="color:var(--text-muted)">${new Date(u.created_at).toLocaleDateString()}</small></td>
                 </tr>
             `).join('');

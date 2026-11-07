@@ -120,7 +120,7 @@ app.use(errorHandler);
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`================================================================`);
-        console.log(`🎬 CineNova - Online Movie Ticket Booking System`);
+        console.log(`🎬 IRSHAD CINEMAS - Online Movie Ticket Booking System`);
         console.log(`👤 Project Owner: Shaik Irshad`);
         console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode`);
         console.log(`🌐 Local URL: http://localhost:${PORT}`);

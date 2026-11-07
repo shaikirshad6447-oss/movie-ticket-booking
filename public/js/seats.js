@@ -32,7 +32,7 @@ const SeatsModule = (() => {
      */
     async function fetchSeatMap(showId) {
         try {
-            const data = await CineNova.api(`/api/shows/${showId}/seats`);
+            const data = await IrshadCinemas.api(`/api/shows/${showId}/seats`);
             currentShow = data.show;
             bookedSeatsSet = new Set((data.booked_seats || []).map(s => String(s).toUpperCase()));
 
@@ -40,7 +40,7 @@ const SeatsModule = (() => {
             renderMatrix();
             updateSummary();
         } catch (err) {
-            CineNova.showToast('Error', err.message, 'error');
+            IrshadCinemas.showToast('Error', err.message, 'error');
             const matrixEl = document.getElementById('seat-matrix');
             if (matrixEl) {
                 matrixEl.innerHTML = `<div class="empty-state">${err.message}</div>`;
@@ -65,11 +65,11 @@ const SeatsModule = (() => {
 
         const showtimeEl = document.getElementById('summary-showtime');
         if (showtimeEl) {
-            showtimeEl.textContent = `${CineNova.formatDate(show.show_date)} • ${CineNova.formatTime(show.show_time)}`;
+            showtimeEl.textContent = `${IrshadCinemas.formatDate(show.show_date)} • ${IrshadCinemas.formatTime(show.show_time)}`;
         }
 
         const priceEl = document.getElementById('summary-ticket-price');
-        if (priceEl) priceEl.textContent = CineNova.formatCurrency(show.ticket_price);
+        if (priceEl) priceEl.textContent = IrshadCinemas.formatCurrency(show.ticket_price);
     }
 
     /**
@@ -153,7 +153,7 @@ const SeatsModule = (() => {
             element.classList.add('available');
         } else {
             if (selectedSeats.size >= 10) {
-                CineNova.showToast('Seat Limit Reached', 'You can select a maximum of 10 seats per booking.', 'info');
+                IrshadCinemas.showToast('Seat Limit Reached', 'You can select a maximum of 10 seats per booking.', 'info');
                 return;
             }
             selectedSeats.add(seatId);
@@ -191,14 +191,14 @@ const SeatsModule = (() => {
         const ticketPrice = currentShow ? parseFloat(currentShow.ticket_price) : 0;
         const total = count * ticketPrice;
 
-        if (subtotalEl) subtotalEl.textContent = CineNova.formatCurrency(total);
-        if (totalEl) totalEl.textContent = CineNova.formatCurrency(total);
+        if (subtotalEl) subtotalEl.textContent = IrshadCinemas.formatCurrency(total);
+        if (totalEl) totalEl.textContent = IrshadCinemas.formatCurrency(total);
 
         if (bookBtn) {
             bookBtn.disabled = count === 0;
             bookBtn.innerHTML = count === 0 
                 ? 'Select Seats to Proceed' 
-                : `<i class="fa-solid fa-lock"></i> Confirm & Book ${count} Seat${count > 1 ? 's' : ''} (${CineNova.formatCurrency(total)})`;
+                : `<i class="fa-solid fa-lock"></i> Confirm & Book ${count} Seat${count > 1 ? 's' : ''} (${IrshadCinemas.formatCurrency(total)})`;
         }
     }
 
@@ -213,9 +213,9 @@ const SeatsModule = (() => {
             if (selectedSeats.size === 0) return;
 
             // Check if user is authenticated
-            const user = CineNova.getCurrentUser();
+            const user = IrshadCinemas.getCurrentUser();
             if (!user) {
-                CineNova.showToast('Authentication Required', 'Please sign in to complete your booking.', 'info');
+                IrshadCinemas.showToast('Authentication Required', 'Please sign in to complete your booking.', 'info');
                 setTimeout(() => {
                     window.location.href = `/login?redirect=${encodeURIComponent(window.location.href)}`;
                 }, 800);
@@ -226,7 +226,7 @@ const SeatsModule = (() => {
             bookBtn.innerHTML = `<div class="spinner" style="width:18px;height:18px;margin:0 auto;border-width:2px;"></div>`;
 
             try {
-                const response = await CineNova.api('/api/bookings', {
+                const response = await IrshadCinemas.api('/api/bookings', {
                     method: 'POST',
                     body: JSON.stringify({
                         show_id: parseInt(showId, 10),
@@ -234,14 +234,14 @@ const SeatsModule = (() => {
                     })
                 });
 
-                CineNova.showToast('Success!', response.message, 'success');
+                IrshadCinemas.showToast('Success!', response.message, 'success');
                 
                 // Show booking confirmation modal or redirect to /bookings
                 setTimeout(() => {
                     window.location.href = `/bookings?confirmedId=${response.booking.booking_id}`;
                 }, 1000);
             } catch (err) {
-                CineNova.showToast('Booking Failed', err.message, 'error');
+                IrshadCinemas.showToast('Booking Failed', err.message, 'error');
                 bookBtn.disabled = false;
                 updateSummary();
                 // Refresh seat map to reflect any freshly booked seats by other customers

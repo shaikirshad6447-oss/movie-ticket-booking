@@ -85,7 +85,7 @@ async function register(req, res, next) {
 
         res.status(201).json({
             success: true,
-            message: 'Account registered successfully! Welcome to CineNova.',
+            message: 'Account registered successfully! Welcome to IRSHAD CINEMAS.',
             token,
             user: {
                 user_id: newUserId,

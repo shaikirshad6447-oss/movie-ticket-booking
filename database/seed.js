@@ -8,7 +8,7 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 async function seedDatabase() {
-    console.log('🎬 [CineNova] Initializing MySQL Database for Online Movie Ticket Booking System...');
+    console.log('🎬 [IRSHAD CINEMAS] Initializing MySQL Database for Online Movie Ticket Booking System...');
     console.log(`Connecting to MySQL host: ${process.env.DB_HOST || 'localhost'}:${process.env.DB_PORT || 3306}`);
 
     // Create initial connection without selecting the database first to ensure database exists

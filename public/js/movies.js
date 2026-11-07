@@ -47,7 +47,7 @@ const MoviesModule = (() => {
         if (!nowShowingContainer) return;
 
         try {
-            const data = await CineNova.api('/api/movies');
+            const data = await IrshadCinemas.api('/api/movies');
             const movies = data.movies || [];
 
             if (movies.length === 0) {
@@ -123,7 +123,7 @@ const MoviesModule = (() => {
             }
 
             try {
-                const data = await CineNova.api(`/api/movies?${queryParams.toString()}`);
+                const data = await IrshadCinemas.api(`/api/movies?${queryParams.toString()}`);
                 const movies = data.movies || [];
 
                 if (countBadge) countBadge.textContent = `${movies.length} Movies`;
@@ -177,11 +177,11 @@ const MoviesModule = (() => {
         }
 
         try {
-            const data = await CineNova.api(`/api/movies/${movieId}`);
+            const data = await IrshadCinemas.api(`/api/movies/${movieId}`);
             const movie = data.movie;
             const shows = data.shows || [];
 
-            document.title = `${movie.title} - CineNova`;
+            document.title = `${movie.title} - IRSHAD CINEMAS`;
 
             // Populate Movie Meta
             document.getElementById('detail-poster').src = movie.poster_url || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=600&auto=format&fit=crop';
@@ -189,7 +189,7 @@ const MoviesModule = (() => {
             document.getElementById('detail-genre').textContent = movie.genre;
             document.getElementById('detail-language').textContent = movie.language;
             document.getElementById('detail-duration').textContent = `${movie.duration} mins`;
-            document.getElementById('detail-release').textContent = CineNova.formatDate(movie.release_date);
+            document.getElementById('detail-release').textContent = IrshadCinemas.formatDate(movie.release_date);
             document.getElementById('detail-rating').innerHTML = `<i class="fa-solid fa-star"></i> ${parseFloat(movie.rating).toFixed(1)} / 10`;
             document.getElementById('detail-description').textContent = movie.description || 'No synopsis provided.';
 
@@ -301,8 +301,8 @@ const MoviesModule = (() => {
                     <div class="showtimes-grid">
                         ${theatreShows.map(show => `
                             <a href="/seats?showId=${show.show_id}" class="showtime-btn">
-                                <span class="showtime-time">${CineNova.formatTime(show.show_time)}</span>
-                                <span class="showtime-price">${CineNova.formatCurrency(show.ticket_price)}</span>
+                                <span class="showtime-time">${IrshadCinemas.formatTime(show.show_time)}</span>
+                                <span class="showtime-price">${IrshadCinemas.formatCurrency(show.ticket_price)}</span>
                             </a>
                         `).join('')}
                     </div>

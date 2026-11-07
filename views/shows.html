@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theatres & Show Schedules - CineNova | Shaik Irshad</title>
+    <title>Theatres & Show Schedules - IRSHAD CINEMAS | Shaik Irshad</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
         <div class="nav-container">
             <a href="/" class="brand-logo">
                 <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
-                <span>Cine<span class="highlight">Nova</span></span>
+                <span>IRSHAD <span class="highlight">CINEMAS</span></span>
             </a>
 
             <nav class="nav-links">
@@ -87,7 +87,7 @@
             <div class="footer-brand">
                 <a href="/" class="brand-logo">
                     <div class="logo-icon"><i class="fa-solid fa-film"></i></div>
-                    <span>Cine<span class="highlight">Nova</span></span>
+                    <span>IRSHAD <span class="highlight">CINEMAS</span></span>
                 </a>
                 <p class="footer-desc">
                     Comprehensive Online Movie Ticket Booking System designed for seamless cinema reservations.
@@ -108,7 +108,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div>© 2026 CineNova. Project Owner: <strong>Shaik Irshad</strong>.</div>
+            <div>© 2026 IRSHAD CINEMAS. Project Owner: <strong>Shaik Irshad</strong>.</div>
         </div>
     </footer>
 
@@ -125,7 +125,7 @@
 
             async function fetchShows() {
                 try {
-                    const data = await CineNova.api('/api/shows');
+                    const data = await IrshadCinemas.api('/api/shows');
                     allShows = data.shows || [];
                     renderShows();
                 } catch (err) {
@@ -164,13 +164,13 @@
                                 <i class="fa-solid fa-location-dot" style="color:var(--accent-red)"></i> ${s.theatre_name}
                             </p>
                             <p style="color:var(--accent-gold); font-size:0.85rem; font-weight:600; margin-top:4px;">
-                                <i class="fa-regular fa-calendar"></i> ${CineNova.formatDate(s.show_date)} at ${CineNova.formatTime(s.show_time)}
+                                <i class="fa-regular fa-calendar"></i> ${IrshadCinemas.formatDate(s.show_date)} at ${IrshadCinemas.formatTime(s.show_time)}
                             </p>
                         </div>
 
                         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem;">
                             <span style="font-size:0.8rem; color:var(--text-muted)">Ticket Price</span>
-                            <span style="font-size:1.35rem; font-weight:800; color:var(--accent-gold)">${CineNova.formatCurrency(s.ticket_price)}</span>
+                            <span style="font-size:1.35rem; font-weight:800; color:var(--accent-gold)">${IrshadCinemas.formatCurrency(s.ticket_price)}</span>
                             <a href="/seats?showId=${s.show_id}" class="btn btn-primary btn-sm">
                                 <i class="fa-solid fa-chair"></i> Select Seats
                             </a>

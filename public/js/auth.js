@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = loginForm.querySelector('button[type="submit"]');
 
             if (!email || !password) {
-                CineNova.showToast('Validation Error', 'Please enter your email and password.', 'error');
+                IrshadCinemas.showToast('Validation Error', 'Please enter your email and password.', 'error');
                 return;
             }
 
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = `<div class="spinner" style="width:18px;height:18px;margin:0 auto;border-width:2px;"></div>`;
 
             try {
-                const data = await CineNova.api('/api/auth/login', {
+                const data = await IrshadCinemas.api('/api/auth/login', {
                     method: 'POST',
                     body: JSON.stringify({ email, password })
                 });
 
-                CineNova.setSession(data.token, data.user);
-                CineNova.showToast('Signed In', data.message, 'success');
+                IrshadCinemas.setSession(data.token, data.user);
+                IrshadCinemas.showToast('Signed In', data.message, 'success');
 
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirect = urlParams.get('redirect');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }, 600);
             } catch (err) {
-                CineNova.showToast('Authentication Failed', err.message, 'error');
+                IrshadCinemas.showToast('Authentication Failed', err.message, 'error');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Sign In';
             }
@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (demoAdminBtn) {
             demoAdminBtn.addEventListener('click', () => {
-                document.getElementById('login-email').value = 'admin@cinenova.com';
+                document.getElementById('login-email').value = 'admin@irshadcinemas.com';
                 document.getElementById('login-password').value = 'Admin@123';
-                CineNova.showToast('Demo Account', 'Populated Administrator credentials.', 'info');
+                IrshadCinemas.showToast('Demo Account', 'Populated Administrator credentials.', 'info');
             });
         }
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             demoUserBtn.addEventListener('click', () => {
                 document.getElementById('login-email').value = 'irshad@example.com';
                 document.getElementById('login-password').value = 'User@123';
-                CineNova.showToast('Demo Account', 'Populated Customer credentials.', 'info');
+                IrshadCinemas.showToast('Demo Account', 'Populated Customer credentials.', 'info');
             });
         }
     }
@@ -101,17 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitBtn = registerForm.querySelector('button[type="submit"]');
 
             if (!name || !email || !password || !confirmPassword) {
-                CineNova.showToast('Validation Error', 'All fields are required.', 'error');
+                IrshadCinemas.showToast('Validation Error', 'All fields are required.', 'error');
                 return;
             }
 
             if (password.length < 6) {
-                CineNova.showToast('Weak Password', 'Password must be at least 6 characters.', 'error');
+                IrshadCinemas.showToast('Weak Password', 'Password must be at least 6 characters.', 'error');
                 return;
             }
 
             if (password !== confirmPassword) {
-                CineNova.showToast('Mismatch', 'Passwords do not match.', 'error');
+                IrshadCinemas.showToast('Mismatch', 'Passwords do not match.', 'error');
                 return;
             }
 
@@ -119,19 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = `<div class="spinner" style="width:18px;height:18px;margin:0 auto;border-width:2px;"></div>`;
 
             try {
-                const data = await CineNova.api('/api/auth/register', {
+                const data = await IrshadCinemas.api('/api/auth/register', {
                     method: 'POST',
                     body: JSON.stringify({ name, email, password, confirmPassword })
                 });
 
-                CineNova.setSession(data.token, data.user);
-                CineNova.showToast('Account Created', data.message, 'success');
+                IrshadCinemas.setSession(data.token, data.user);
+                IrshadCinemas.showToast('Account Created', data.message, 'success');
 
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 800);
             } catch (err) {
-                CineNova.showToast('Registration Error', err.message, 'error');
+                IrshadCinemas.showToast('Registration Error', err.message, 'error');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Create Account';
             }

@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const listContainer = document.getElementById('my-bookings-list');
     if (!listContainer) return;
 
-    const user = CineNova.getCurrentUser();
+    const user = IrshadCinemas.getCurrentUser();
     if (!user) {
         window.location.href = `/login?redirect=${encodeURIComponent(window.location.href)}`;
         return;
     }
 
     try {
-        const data = await CineNova.api('/api/bookings/my');
+        const data = await IrshadCinemas.api('/api/bookings/my');
         const bookings = data.bookings || [];
 
         if (bookings.length === 0) {
@@ -55,12 +55,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <i class="fa-solid fa-location-dot" style="color:var(--accent-red); margin-right:4px;"></i> ${b.theatre_name}
                         </p>
                         <p style="color:var(--accent-gold); font-size:0.875rem; font-weight:600;">
-                            <i class="fa-regular fa-calendar" style="margin-right:4px;"></i> ${CineNova.formatDate(b.show_date)} • ${CineNova.formatTime(b.show_time)}
+                            <i class="fa-regular fa-calendar" style="margin-right:4px;"></i> ${IrshadCinemas.formatDate(b.show_date)} • ${IrshadCinemas.formatTime(b.show_time)}
                         </p>
                         <div style="display:flex; gap:1.5rem; font-size:0.85rem; color:var(--text-muted); margin-top:0.4rem; flex-wrap:wrap;">
                             <span>Booking ID: <strong style="color:var(--text-primary)">#${b.booking_id}</strong></span>
                             <span>Seats (${b.seats}): <strong style="color:var(--text-primary)">${seatString}</strong></span>
-                            <span>Total Paid: <strong style="color:var(--accent-gold); font-size:1rem;">${CineNova.formatCurrency(b.total_amount)}</strong></span>
+                            <span>Total Paid: <strong style="color:var(--accent-gold); font-size:1rem;">${IrshadCinemas.formatCurrency(b.total_amount)}</strong></span>
                         </div>
                     </div>
 
@@ -108,12 +108,12 @@ function openTicketModal(b) {
     }
     const seatString = Array.isArray(seats) ? seats.join(', ') : '';
 
-    document.getElementById('modal-booking-id').textContent = `#CN-${String(b.booking_id).padStart(6, '0')}`;
+    document.getElementById('modal-booking-id').textContent = `#IC-${String(b.booking_id).padStart(6, '0')}`;
     document.getElementById('modal-movie-title').textContent = b.movie_title;
     document.getElementById('modal-theatre').textContent = b.theatre_name;
-    document.getElementById('modal-showtime').textContent = `${CineNova.formatDate(b.show_date)} at ${CineNova.formatTime(b.show_time)}`;
+    document.getElementById('modal-showtime').textContent = `${IrshadCinemas.formatDate(b.show_date)} at ${IrshadCinemas.formatTime(b.show_time)}`;
     document.getElementById('modal-seats').textContent = `${seatString} (${b.seats} Ticket${b.seats > 1 ? 's' : ''})`;
-    document.getElementById('modal-amount').textContent = CineNova.formatCurrency(b.total_amount);
+    document.getElementById('modal-amount').textContent = IrshadCinemas.formatCurrency(b.total_amount);
     document.getElementById('modal-status').textContent = b.booking_status;
 
     modal.classList.add('active');

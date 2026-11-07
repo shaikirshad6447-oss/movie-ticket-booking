@@ -111,7 +111,7 @@ CREATE TABLE bookings (
 -- Admin@123 => $2a$10$E53AbQCyCQb6IanVYxKmDuKh0xb82TXKo0ICDNSjUHf0mljaeWTly
 -- User@123  => $2a$10$/MPh0y.5jRz7.IVMiwFlFe8ae0oFq7.Z.Lanbmtk/1ihqPylgNx4O
 INSERT INTO users (user_id, name, email, password, role) VALUES
-(1, 'Shaik Irshad (Admin)', 'admin@cinenova.com', '$2a$10$E53AbQCyCQb6IanVYxKmDuKh0xb82TXKo0ICDNSjUHf0mljaeWTly', 'admin'),
+(1, 'Shaik Irshad (Admin)', 'admin@irshadcinemas.com', '$2a$10$E53AbQCyCQb6IanVYxKmDuKh0xb82TXKo0ICDNSjUHf0mljaeWTly', 'admin'),
 (2, 'Shaik Irshad', 'irshad@example.com', '$2a$10$/MPh0y.5jRz7.IVMiwFlFe8ae0oFq7.Z.Lanbmtk/1ihqPylgNx4O', 'customer'),
 (3, 'Rahul Sharma', 'rahul.sharma@example.com', '$2a$10$/MPh0y.5jRz7.IVMiwFlFe8ae0oFq7.Z.Lanbmtk/1ihqPylgNx4O', 'customer'),
 (4, 'Priya Patel', 'priya.patel@example.com', '$2a$10$/MPh0y.5jRz7.IVMiwFlFe8ae0oFq7.Z.Lanbmtk/1ihqPylgNx4O', 'customer'),

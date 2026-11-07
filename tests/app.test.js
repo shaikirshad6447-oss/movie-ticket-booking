@@ -44,7 +44,7 @@ function makeRequest(options, postData = null) {
 
 async function runTestSuite() {
     console.log('\n================================================================');
-    console.log('🧪 Starting CineNova Automated System Verification Suite');
+    console.log('🧪 Starting IRSHAD CINEMAS Automated System Verification Suite');
     console.log('👤 Project Owner: Shaik Irshad');
     console.log('================================================================\n');
 
@@ -126,7 +126,7 @@ async function runTestSuite() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         }, {
-            email: 'admin@cinenova.com',
+            email: 'admin@irshadcinemas.com',
             password: 'Admin@123'
         });
 

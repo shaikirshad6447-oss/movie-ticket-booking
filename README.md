@@ -1,4 +1,4 @@
-# CineNova — Online Movie Ticket Booking System
+# IRSHAD CINEMAS — Online Movie Ticket Booking System
 
 [![Node.js](https://img.shields.io/badge/Node.js-v20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-v4.21-000000?logo=express&logoColor=white)](https://expressjs.com/)
@@ -13,7 +13,7 @@
 ## 📌 Project Information
 
 - **Project Title:** Online Movie Ticket Booking System
-- **Platform Name:** CineNova
+- **Platform Name:** IRSHAD CINEMAS
 - **Project Owner / Lead Developer:** **Shaik Irshad**
 - **Academic Context:** College Mini-Project (Full-Stack Production Quality)
 - **Repository Architecture:** Monorepo with Model-View-Controller & REST API separation
@@ -22,7 +22,7 @@
 
 ## 🌟 Executive Summary & Features
 
-**CineNova** replicates the seamless booking flows of commercial platforms like BookMyShow and PVR INOX, wrapped in an original **Dark Cinematic Theme** (`#0B0B0F`, `#17171F`, `#E50914`, `#D4AF37`).
+**IRSHAD CINEMAS** replicates the seamless booking flows of commercial platforms like BookMyShow and PVR INOX, wrapped in an original **Dark Cinematic Theme** (`#0B0B0F`, `#17171F`, `#E50914`, `#D4AF37`).
 
 ### 👤 Customer Experience
 - **Cinematic Homepage:** Large featured blockbuster banners, trailer previews, quick booking shortcuts, and curated categories (*Now Showing*, *Highest Rated*, *Coming Soon*).
@@ -351,7 +351,7 @@ npm run seed
 ```
 *Expected Output:*
 ```text
-🎬 [CineNova] Initializing MySQL Database for Online Movie Ticket Booking System...
+🎬 [IRSHAD CINEMAS] Initializing MySQL Database for Online Movie Ticket Booking System...
 ✓ Successfully authenticated with MySQL server.
 Executing schema.sql statements...
 🎉 Database initialization and seeding successful!
@@ -375,7 +375,7 @@ For instant grading and demonstration, click the demo credential buttons on the 
 
 | Role | Email Address | Password | Privileges |
 | :--- | :--- | :--- | :--- |
-| **Administrator** | `admin@cinenova.com` | `Admin@123` | Full access to Admin Console, Analytics, Movie/Show CRUD, User Directory |
+| **Administrator** | `admin@irshadcinemas.com` | `Admin@123` | Full access to Admin Console, Analytics, Movie/Show CRUD, User Directory |
 | **Customer 1** | `irshad@example.com` | `User@123` | Ticket booking, Seat matrix, Booking history, M-tickets |
 | **Customer 2** | `rahul.sharma@example.com` | `User@123` | Customer features |
 | **Customer 3** | `priya.patel@example.com` | `User@123` | Customer features |
@@ -394,7 +394,7 @@ npm test
 ### Verification Results
 ```text
 ================================================================
-🧪 Starting CineNova Automated System Verification Suite
+🧪 Starting IRSHAD CINEMAS Automated System Verification Suite
 👤 Project Owner: Shaik Irshad
 ================================================================
 
